@@ -1,0 +1,20 @@
+{
+  "name": "sample",
+  "manifest_version": 2,
+  "description": "sample description",
+  "version": "1.1",
+  "web_accessible_resources": ["*"],
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "node_modules/jquery/dist/jquery.min.js",
+        "script.js"
+      ]
+    }
+  ]
+}
