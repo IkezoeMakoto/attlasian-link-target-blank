@@ -6,9 +6,24 @@ function main(e) {
     function jsLoaded() {
         if (document.querySelector('a') != null) {
             clearInterval(jsInitCheckTimer);
-            $("a[href^=https\\:\\/\\/]").not($("a[href^=https\\:\\/\\/sample\\.jp]")).each((_, e) => {
-                $(e).attr('target', '_blank');
+            const $origin = $("a[href^=https\\:\\/\\/sample\\.jp]");
+            const $https = $("a[href^=https\\:\\/\\/]");
+            const $http = $("a[href^=http\\:\\/\\/]");
+            $https.not($origin).each((_, e) => {
+                addTargetBlank(e);
+            });
+            $http.not($origin).each((_, e) => {
+                addTargetBlank(e);
             });
         }
     }
 }
+
+/**
+ * @param e element
+ */
+addTargetBlank = (e) => {
+    // 削除してから追加しないと正しく追加されない
+    $(e).removeAttr('target');
+    $(e).attr('target', '_blank');
+};
